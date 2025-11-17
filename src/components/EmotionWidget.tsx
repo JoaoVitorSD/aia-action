@@ -1,5 +1,3 @@
-import { Video } from '../types/video';
-
 interface EmotionWidgetProps {
   emocao: string;
 }
