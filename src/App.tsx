@@ -1,10 +1,13 @@
 import { useState } from 'react';
 import { Dashboard } from './components/Dashboard';
+import { AnalyticsDashboard } from './components/AnalyticsDashboard';
+import { Navigation } from './components/Navigation';
 import { mockVideos } from './data/mockVideos';
 import { Video } from './types/video';
 
 function App() {
   const [videos, setVideos] = useState<Video[]>(mockVideos);
+  const [currentView, setCurrentView] = useState<'videos' | 'analytics'>('videos');
 
   const handleUpdateVideo = (videoId: string, updates: Partial<Video>) => {
     setVideos((prevVideos) =>
@@ -14,7 +17,16 @@ function App() {
     );
   };
 
-  return <Dashboard videos={videos} onUpdateVideo={handleUpdateVideo} />;
+  return (
+    <div>
+      <Navigation currentView={currentView} onViewChange={setCurrentView} />
+      {currentView === 'videos' ? (
+        <Dashboard videos={videos} onUpdateVideo={handleUpdateVideo} />
+      ) : (
+        <AnalyticsDashboard videos={videos} />
+      )}
+    </div>
+  );
 }
 
 export default App;
