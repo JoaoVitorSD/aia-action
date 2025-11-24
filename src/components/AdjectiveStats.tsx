@@ -11,8 +11,8 @@ export function AdjectiveStats({ videos }: AdjectiveStatsProps) {
   if (stats.length === 0) {
     return (
       <div className="bg-white rounded-lg shadow p-6">
-        <h2 className="text-xl font-bold text-gray-900 mb-4">Adjetivos Positivos</h2>
-        <p className="text-gray-500">Nenhum adjetivo positivo encontrado nos vídeos filtrados.</p>
+        <h2 className="text-xl font-bold text-gray-900 mb-4">Opiniões</h2>
+        <p className="text-gray-500">Nenhuma opinião encontrada nos vídeos filtrados.</p>
       </div>
     );
   }
@@ -35,7 +35,7 @@ export function AdjectiveStats({ videos }: AdjectiveStatsProps) {
   return (
     <div className="bg-white rounded-lg shadow p-6">
       <div className="flex items-center justify-between mb-6">
-        <h2 className="text-xl font-bold text-gray-900">Adjetivos Positivos</h2>
+        <h2 className="text-xl font-bold text-gray-900">Opiniões</h2>
         <span className="text-sm text-gray-500">
           {videos.length} vídeo{videos.length !== 1 ? 's' : ''} analisado{videos.length !== 1 ? 's' : ''}
         </span>

@@ -89,9 +89,9 @@ export function AnalyticsDashboard({ videos }: AnalyticsDashboardProps) {
           </div>
         </div>
 
-        {/* Seção de Adjetivos Positivos */}
+        {/* Seção de Opiniões */}
         <div className="bg-white rounded-lg shadow p-6 mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">Adjetivos Positivos</h2>
+          <h2 className="text-2xl font-bold text-gray-900 mb-6">Opiniões</h2>
           
           {topAdjectives.length > 0 ? (
             <div className="mb-6">
@@ -113,10 +113,10 @@ export function AnalyticsDashboard({ videos }: AnalyticsDashboardProps) {
               </ResponsiveContainer>
             </div>
           ) : (
-            <p className="text-gray-500 text-center py-8">Nenhum adjetivo positivo encontrado</p>
+            <p className="text-gray-500 text-center py-8">Nenhuma opinião encontrada</p>
           )}
 
-          {/* Cards de adjetivos */}
+          {/* Cards de opiniões */}
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
             {adjectiveStats.map(({ adjective, count, percentage }) => (
               <div
@@ -208,9 +208,9 @@ export function AnalyticsDashboard({ videos }: AnalyticsDashboardProps) {
           </div>
         </div>
 
-        {/* Tabela de Top Adjetivos */}
+        {/* Tabela de Top Opiniões */}
         <div className="bg-white rounded-lg shadow p-6">
-          <h3 className="text-xl font-bold text-gray-900 mb-4">Ranking de Adjetivos Positivos</h3>
+          <h3 className="text-xl font-bold text-gray-900 mb-4">Ranking de Opiniões</h3>
           <div className="overflow-x-auto">
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
@@ -219,7 +219,7 @@ export function AnalyticsDashboard({ videos }: AnalyticsDashboardProps) {
                     Posição
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Adjetivo
+                    Opinião
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Ocorrências
