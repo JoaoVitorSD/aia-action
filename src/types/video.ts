@@ -10,6 +10,11 @@ export interface Video {
   sugestao_acao: string;
   prioridade_acao: 'Crítica' | 'Alta' | 'Média' | 'Baixa';
   justificativa_acao: string;
+  video_url?: string;
+  video_title?: string;
+  video_author?: string;
+  video_thumbnail_url?: string;
+  video_metadata_status?: 'carregando' | 'sucesso' | 'erro';
+  video_metadata_error?: string;
   status_acao?: 'Pendente' | 'Ação Enviada';
 }
-
