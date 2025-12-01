@@ -16,5 +16,11 @@ export interface Video {
   video_thumbnail_url?: string;
   video_metadata_status?: 'carregando' | 'sucesso' | 'erro';
   video_metadata_error?: string;
+  views_atualizados?: number;
+  likes_atualizados?: number;
+  metricas_status?: 'carregando' | 'sucesso' | 'erro';
+  metricas_erro?: string;
+  transcricao_status?: 'carregando' | 'sucesso' | 'erro';
+  transcricao_erro?: string;
   status_acao?: 'Pendente' | 'Ação Enviada';
 }

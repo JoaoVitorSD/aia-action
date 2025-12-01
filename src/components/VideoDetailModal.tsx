@@ -13,13 +13,23 @@ export function VideoDetailModal({ video, onClose, onSendAction }: VideoDetailMo
     onSendAction(video.video_id);
   };
 
+  const viewsDisplay = video.views_atualizados ?? video.views_mock;
+  const likesDisplay = video.likes_atualizados ?? video.likes_mock;
+
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
       <div className="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto">
         <div className="sticky top-0 bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between">
           <div>
-            <h2 className="text-2xl font-bold text-gray-900">{video.video_id}</h2>
-            <p className="text-sm text-gray-500 mt-1">{video.fonte}</p>
+            <h2 className="text-2xl font-bold text-gray-900">
+              {video.video_title || video.video_id}
+            </h2>
+            <p className="text-sm text-gray-500 mt-1">
+              {video.video_author ? `${video.video_author} · ${video.fonte}` : video.fonte}
+            </p>
+            {video.video_title && (
+              <p className="text-xs text-gray-400 mt-1">ID: {video.video_id}</p>
+            )}
           </div>
           <button
             onClick={onClose}
@@ -33,12 +43,23 @@ export function VideoDetailModal({ video, onClose, onSendAction }: VideoDetailMo
           <div className="grid grid-cols-2 gap-4">
             <div className="flex items-center gap-2 text-gray-600">
               <span>👁️</span>
-              <span className="font-semibold">{video.views_mock.toLocaleString()} views</span>
+              <span className="font-semibold">{viewsDisplay.toLocaleString()} views</span>
             </div>
             <div className="flex items-center gap-2 text-gray-600">
               <span>❤️</span>
-              <span className="font-semibold">{video.likes_mock.toLocaleString()} likes</span>
+              <span className="font-semibold">{likesDisplay.toLocaleString()} likes</span>
             </div>
+          </div>
+          <div>
+            {video.metricas_status === 'carregando' && (
+              <p className="text-xs text-blue-600">Atualizando views e likes...</p>
+            )}
+            {video.metricas_status === 'erro' && video.metricas_erro && (
+              <p className="text-xs text-red-600">{video.metricas_erro}</p>
+            )}
+            {video.metricas_status === 'sucesso' && (
+              <p className="text-xs text-green-600">Métricas atualizadas do TikTok.</p>
+            )}
           </div>
 
           <div>
@@ -46,6 +67,15 @@ export function VideoDetailModal({ video, onClose, onSendAction }: VideoDetailMo
             <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
               <p className="text-sm font-medium text-gray-700 mb-2">Transcrição da Voz</p>
               <p className="text-gray-900 italic">"{video.transcricao_voz}"</p>
+              {video.transcricao_status === 'carregando' && (
+                <p className="text-xs text-blue-600 mt-2">Transcrevendo áudio...</p>
+              )}
+              {video.transcricao_status === 'erro' && video.transcricao_erro && (
+                <p className="text-xs text-red-600 mt-2">{video.transcricao_erro}</p>
+              )}
+              {video.transcricao_status === 'sucesso' && (
+                <p className="text-xs text-green-600 mt-2">Transcrição atualizada.</p>
+              )}
             </div>
           </div>
 
@@ -111,4 +141,3 @@ export function VideoDetailModal({ video, onClose, onSendAction }: VideoDetailMo
     </div>
   );
 }
-

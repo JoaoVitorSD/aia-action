@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Video } from '../types/video';
 import { VideoCard } from './VideoCard';
 import { VideoDetailModal } from './VideoDetailModal';
@@ -26,6 +26,14 @@ export function Dashboard({ videos, onUpdateVideo }: DashboardProps) {
         video.transcricao_voz.toLowerCase().includes(searchQuery.toLowerCase())
       )
     : videosByFonte;
+
+  useEffect(() => {
+    if (!selectedVideo) return;
+    const freshVideo = videos.find((v) => v.video_id === selectedVideo.video_id);
+    if (freshVideo && freshVideo !== selectedVideo) {
+      setSelectedVideo(freshVideo);
+    }
+  }, [videos, selectedVideo]);
 
   const handleVideoClick = (video: Video) => {
     setSelectedVideo(video);
@@ -127,7 +135,12 @@ export function Dashboard({ videos, onUpdateVideo }: DashboardProps) {
             <h2 className="text-2xl font-bold text-gray-900 mb-6">Vídeos Indexados</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredVideos.map((video) => (
-                <VideoCard key={video.video_id} video={video} onClick={() => handleVideoClick(video)} />
+                <VideoCard
+                  key={video.video_id}
+                  video={video}
+                  onClick={() => handleVideoClick(video)}
+                  onUpdateVideo={(updates) => onUpdateVideo(video.video_id, updates)}
+                />
               ))}
             </div>
           </div>
@@ -144,4 +157,3 @@ export function Dashboard({ videos, onUpdateVideo }: DashboardProps) {
     </div>
   );
 }
-
